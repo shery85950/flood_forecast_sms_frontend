@@ -1,8 +1,8 @@
 // ------------------------------------------------------------------
 // 🔧 CONFIGURE SUPABASE HERE
 // You can find these in your Supabase Project Settings -> API
-const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const SUPABASE_URL = 'https://fitvvzylzwmrcnaqvdpl.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_RK6iZCSkiOZASxnjyJzx1Q_R3-1Af8h';
 // ------------------------------------------------------------------
 
 // Initialize Supabase Client
@@ -61,3 +61,4 @@ function showMessage(text, type) {
     messageDiv.textContent = text;
     messageDiv.className = `message ${type}`;
 }
+
