@@ -1,8 +1,8 @@
 // ------------------------------------------------------------------
 // 🔧 CONFIGURE SUPABASE HERE
-// You can find these in your Supabase Project Settings -> API
-const SUPABASE_URL = 'https://fitvvzylzwmrcnaqvdpl.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_secret_Y9xGarr3ctNur5tGxyOtcQ_B1NOR64v';
+// These will be loaded from Vercel Environment Variables
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 // ------------------------------------------------------------------
 
 // Initialize Supabase Client
@@ -61,4 +61,3 @@ function showMessage(text, type) {
     messageDiv.textContent = text;
     messageDiv.className = `message ${type}`;
 }
-
