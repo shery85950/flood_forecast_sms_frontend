@@ -1,16 +1,42 @@
 // ------------------------------------------------------------------
-// 🔧 CONFIGURE SUPABASE HERE
-// These will be loaded from Vercel Environment Variables
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// 🔧 SUPABASE CONFIG - Using Environment Variables
+// These will be loaded from the backend API
 // ------------------------------------------------------------------
 
-// Initialize Supabase Client
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let supabase;
+
+async function initializeSupabase() {
+    try {
+        const response = await fetch('/api/config');
+        const config = await response.json();
+        
+        // Access Supabase from the global window object
+        const { createClient } = window.supabase;
+        supabase = createClient(
+            config.SUPABASE_URL,
+            config.SUPABASE_ANON_KEY
+        );
+        
+        console.log('Supabase initialized successfully');
+    } catch (error) {
+        console.error('Failed to initialize Supabase:', error);
+        showMessage('Configuration error. Please contact support.', 'error');
+    }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    initializeSupabase();
+});
 
 document.getElementById('signupForm').addEventListener('submit', async function (e) {
     e.preventDefault();
-
+    
+    if (!supabase) {
+        showMessage('Application not ready. Please refresh the page.', 'error');
+        return;
+    }
+    
     const submitBtn = document.getElementById('submitBtn');
     const messageDiv = document.getElementById('message');
     const formData = new FormData(this);
