@@ -1,0 +1,11 @@
+{
+  "buildCommand": "cd frontend && echo 'Frontend build complete'",
+  "outputDirectory": "frontend",
+  "installCommand": "pip install -r backend/requirements.txt",
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/backend/api/:path*"
+    }
+  ]
+}
